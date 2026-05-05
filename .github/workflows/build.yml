@@ -1,0 +1,29 @@
+name: Java build workflow with Maven
+
+on:
+  workflow_call:
+    inputs:
+      java_version:
+        required: false
+        type: string
+        default: '17'
+      maven_command:
+        required: false
+        type: string
+        default: clean install  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK ${{inputs.java_version}}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{inputs.java_version}}
+          distribution: 'Temurin'
+          cache: maven
+      - name: Build with Maven 
+        run: mvn ${{inputs.maven_command}}
