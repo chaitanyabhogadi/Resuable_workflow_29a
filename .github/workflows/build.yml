@@ -11,6 +11,7 @@ on:
         required: false
         type: string
         default: clean install  
+        
 
 jobs:
   build:
@@ -18,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 
       - name: Set up JDK ${{inputs.java_version}}
         uses: actions/setup-java@v4
         with:
-          java_version: ${{inputs.java_version}}
+          java-version: ${{inputs.java_version}}
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven 
